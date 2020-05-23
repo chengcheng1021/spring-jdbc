@@ -5,6 +5,7 @@ import java.sql.*;
 public class JdbcDemo1 {
 
     public static void main(String[] args) throws Exception {
+
         //1、注册驱动
         //DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         Class.forName("com.mysql.jdbc.Driver");
