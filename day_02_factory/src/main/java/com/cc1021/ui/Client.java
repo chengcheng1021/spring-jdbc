@@ -1,5 +1,7 @@
 package com.cc1021.ui;
 
+import com.cc1021.factory.BeanFactory;
+import com.cc1021.service.IAccountService;
 import com.cc1021.service.impl.AccountServiceImpl;
 
 /**
@@ -8,7 +10,8 @@ import com.cc1021.service.impl.AccountServiceImpl;
 public class Client {
 
     public static void main(String[] args) {
-        AccountServiceImpl as = new AccountServiceImpl();
+        //IAccountService as = new AccountServiceImpl();
+        IAccountService as = (IAccountService) BeanFactory.getBean("accountService");
         as.saveAccount();
     }
 }

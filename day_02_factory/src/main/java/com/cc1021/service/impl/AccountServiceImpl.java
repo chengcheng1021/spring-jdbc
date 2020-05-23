@@ -1,5 +1,6 @@
 package com.cc1021.service.impl;
 
+import com.cc1021.factory.BeanFactory;
 import com.cc1021.service.IAccountService;
 import com.cc1021.dao.IAccountDao;
 import com.cc1021.dao.impl.AccountDaoImpl;
@@ -9,7 +10,8 @@ import com.cc1021.dao.impl.AccountDaoImpl;
  */
 public class AccountServiceImpl implements IAccountService {
 
-    private IAccountDao accountDao = new AccountDaoImpl();
+    //private IAccountDao accountDao = new AccountDaoImpl();
+    private IAccountDao accountDao = (IAccountDao)BeanFactory.getBean("accountDao");
 
     public void saveAccount() {
         accountDao.saveAccount();
