@@ -11,6 +11,10 @@ public class AccountServiceImpl implements IAccountService {
 
     private IAccountDao accountDao = new AccountDaoImpl();
 
+    public AccountServiceImpl() {
+        System.out.println("对象创建了");
+    }
+
     public void saveAccount() {
         accountDao.saveAccount();
     }
