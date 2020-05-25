@@ -8,9 +8,9 @@ import com.cc1021.service.IAccountService;
 public class AccountServiceImpl implements IAccountService {
 
 
-//    public AccountServiceImpl() {
-//        System.out.println("对象创建了");
-//    }
+    public AccountServiceImpl() {
+        System.out.println("对象创建了");
+    }
 
     public void saveAccount() {
         System.out.println("service 中的 saveAccount 执行了");
