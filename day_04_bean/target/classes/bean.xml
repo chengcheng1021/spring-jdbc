@@ -31,12 +31,26 @@
         bean标签的scope属性：
             作用：用于指定bean的作用范围
             取值：
-                singleton
-                prototype
-                request
-                session
-                global-session
+                singleton：单例的（默认值）
+                prototype：多例的
+                request：作用于web应用的请求范围
+                session：作用于web应用的会话范围
+                global-session：作用于集群范围的会话范围（全局会话范围），当不是集群时，他就是session
+        <bean id="accountService" class="com.cc1021.factory.StaticFactory" factory-method="getAccountService" scope="prototype"></bean>
     -->
-    <bean id="accountService" class="com.cc1021.factory.StaticFactory" factory-method="getAccountService" scope="prototype"></bean>
+
+    <!--
+        bean对象的生命周期
+            单例对象
+                出生：当容器创建时对象出生
+                活着：只要容器还在，对象一直活着
+                死亡：容器销毁，对象消亡
+            多例对象
+                出生：
+                活着：
+                死亡：
+    -->
+    <bean id="accountService" class="com.cc1021.service.impl.AccountServiceImpl" scope="prototype"
+    init-method="init" destroy-method="destory"></bean>
 
 </beans>
