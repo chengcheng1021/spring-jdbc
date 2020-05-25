@@ -24,8 +24,19 @@
         <bean id="accountService" factory-bean="instanceFactory" factory-method="getAccountService"></bean>
 
             第三种方式：使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象，并存入spring容器）
-
     -->
-    <bean id="accountService" class="com.cc1021.factory.StaticFactory" factory-method="getAccountService"></bean>
+
+    <!--
+        bean作用范围调整
+        bean标签的scope属性：
+            作用：用于指定bean的作用范围
+            取值：
+                singleton：单例的（默认值）
+                prototype：多例的
+                request：作用于web应用的请求范围
+                session：作用于web应用的会话范围
+                global-session：作用于集群范围的会话范围（全局会话范围），当不是集群时，他就是session
+    -->
+    <bean id="accountService" class="com.cc1021.factory.StaticFactory" factory-method="getAccountService" scope="prototype"></bean>
 
 </beans>
