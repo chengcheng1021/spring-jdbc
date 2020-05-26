@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 /**
@@ -62,8 +64,18 @@ import javax.annotation.Resource;
  *
  *  用于改变作用范围的
  *      他们的作用和在xml配置文件中编写一个<bean>标签中写一个<scope></scope>作用是一样的
- *  和生命周期相关
+ *      @Scope
+ *          作用：用于指定bean的作用范围
+ *          属性：
+ *              vlaue：指定范围的取值。常用取值：singleton prototype
+ *
+ *
+ *  和生命周期相关（了解）
  *      他们的作用和在xml配置文件中编写一个<bean>标签中写一个<init-method>和<destory-method>作用是一样的
+ *      @PreDestory
+ *          作用：用于指定销毁方法
+ *      @PostConstruct
+ *          作用：用于指定初始化方法
  */
 @Component("accountService")
 public class AccountServiceImpl implements IAccountService {
@@ -75,6 +87,16 @@ public class AccountServiceImpl implements IAccountService {
 
     public AccountServiceImpl() {
         //System.out.println("对象创建了");
+    }
+
+    @PostConstruct
+    public void init(){
+        System.out.println("初始化方法执行了");
+    }
+
+    @PreDestroy
+    public void destory(){
+        System.out.println("销毁方法执行了");
     }
 
     public void saveAccount() {
