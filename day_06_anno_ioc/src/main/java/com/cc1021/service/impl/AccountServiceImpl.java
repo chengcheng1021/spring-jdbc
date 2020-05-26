@@ -20,6 +20,12 @@ import org.springframework.stereotype.Component;
  *          作用：用于把当前类对象存入Spring容器中
  *          属性：
  *              value：用于指定bean的id。当不写时，它的默认值时当前类名，且首字母改小写。
+ *      @Controller：一般用在表现层
+ *      @Service：一般用在业务层
+ *      @Respository：一般用在持久层
+ *      以上三个注解他们的作用和属性与Component是一摸一样的。
+ *      他们三个是spring框架为我们提供明确的三层使用的注解，使我们的三层对象更加清晰
+ *
  *
  *  用于注入数据的
  *      他们的作用和在xml配置文件中编写一个<bean>标签中写一个<property></property>实现的功能是一样的
