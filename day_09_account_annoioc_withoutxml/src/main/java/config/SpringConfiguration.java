@@ -33,10 +33,18 @@ import javax.sql.DataSource;
  *          value：
  *              用于指定其他配置类的字节码。
  *              当我们使用 Import 的注解之后，有 Import 注解的类就是父配置类，而导入的都是子配置类
+ *
+ *  @PropertySource
+ *      作用：用于指定 properties 文件的位置
+ *      属性：
+ *          value：指定文件的名称和路径
+ *          关键字：classpath，表示类路径下
+ *
  */
 @Configuration
 @ComponentScan(basePackages = {"com.cc1021"})
 @Import(JdbcConfig.class)
+@PropertySource("classpath:jdbcConfig.properties")
 public class SpringConfiguration {
     /**
      * 用于创建一个 QueryRunner 对象
