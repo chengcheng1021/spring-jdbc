@@ -12,6 +12,8 @@ import javax.sql.DataSource;
  *
  *  @Configuration
  *      作用：指定当前类是一个配置类
+ *      细节：当配置类作为 AnnotationConfigApplicationContext 对象创建的参数时，该注解可以不写。
+ *
  *  @ComponentScan
  *      作用：用于通过注解指定 spring 在创建容器时需要扫描的包
  *      属性：
@@ -24,9 +26,17 @@ import javax.sql.DataSource;
  *          name：用于指定 bean 的 id，当不写时，默认值是当前方法的名称
  *      细节：
  *          当我们使用注解配置方法时，如果方法有参数，spring 框架会去容器中查找有没有可用的 bean 对象。
+ *
+ *  @Import：
+ *      作用：用于导入其他的配置类
+ *      属性：
+ *          value：
+ *              用于指定其他配置类的字节码。
+ *              当我们使用 Import 的注解之后，有 Import 注解的类就是父配置类，而导入的都是子配置类
  */
 @Configuration
 @ComponentScan(basePackages = {"com.cc1021"})
+@Import(JdbcConfig.class)
 public class SpringConfiguration {
     /**
      * 用于创建一个 QueryRunner 对象
@@ -37,23 +47,5 @@ public class SpringConfiguration {
     @Scope("prototype")
     public QueryRunner createQueryRunner(DataSource dataSource){
         return new QueryRunner(dataSource);
-    }
-
-    /**
-     * 创建数据库对象
-     * @return
-     */
-    @Bean(name = "dataSource")
-    public DataSource createDataSource(){
-        try {
-            ComboPooledDataSource ds = new ComboPooledDataSource();
-            ds.setDriverClass("com.mysql.jdbc.Driver");
-            ds.setJdbcUrl("jdbc:mysql://localhost:3306/db1");
-            ds.setUser("root");
-            ds.setPassword("");
-            return ds;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }
