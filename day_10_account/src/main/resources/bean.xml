@@ -3,12 +3,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- 配置代理的 service -->
+    <bean id="proxyAccountService" factory-bean="beanFactory" factory-method="getAccountService"></bean>
+
+    <!-- 配置beanFactory-->
+    <bean id="beanFactory" class="com.cc1021.factory.BeanFactory">
+        <!-- 注入service -->
+        <property name="accountService" ref="accountService"></property>
+        <!-- 注入事务管理器 -->
+        <property name="txManager" ref="txManager"></property>
+    </bean>
+
     <!-- 配置Service -->
     <bean id="accountService" class="com.cc1021.service.impl.AccountServiceImpl">
         <!-- 注入dao -->
         <property name="accountDao" ref="accountDao"></property>
-        <!-- 注入事务管理器 -->
-        <property name="txManager" ref="txManager"></property>
     </bean>
 
     <!-- 配置Dao对象 -->
