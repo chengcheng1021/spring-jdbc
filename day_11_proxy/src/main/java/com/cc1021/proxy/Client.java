@@ -27,6 +27,7 @@ public class Client {
          *          使用Proxy类中的 newProxyInstance 方法
          *      创建代理对象的要求：
          *          被代理类至少实现一个接口，如果没有则不能使用
+         *
          *      newProxyInstance 方法的参数：
          *          ClassLoader：类加载器
          *              它是用于加载代理对象字节码的。和被代理对象使用相同的类加载器。固定写法。
@@ -36,7 +37,7 @@ public class Client {
          *              它是让我们写如何代理。我们一般都是写一个该接口的实现类，通常情况下都是匿名内部类，但不是必须的。
          *              此接口的实现类都是谁用谁写。
          */
-        IProducer proxyProducer = (IProducer)Proxy.newProxyInstance(producer.getClass().getClassLoader(),
+        IProducer proxyProducer = (IProducer) Proxy.newProxyInstance(producer.getClass().getClassLoader(),
                 producer.getClass().getInterfaces(),
                 new InvocationHandler() {
                     /**
