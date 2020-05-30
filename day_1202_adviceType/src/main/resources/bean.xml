@@ -15,13 +15,6 @@
 
     <!-- 配置 AOP -->
     <aop:config>
-        <!--
-                配置切入点表达式，id属性用于指定表达式的唯一标识。expression 属性用于指定表达式内容
-                此标签写在 aop:aspect 标签内部只能当前切面使用
-                它还可以写在 aop:aspect 外面，此时就变成了所有切面可用
-            -->
-        <aop:pointcut id="pt1" expression="execution(* com.cc1021.service.impl.*.*(..))"></aop:pointcut>
-
         <!-- 配置切面 -->
         <aop:aspect id="logAdvise" ref="logger">
             <!-- 配置前置通知，在切入点方法执行之前执行 -->
@@ -36,7 +29,12 @@
             <!-- 配置最终通知，无论切入点方法是否正常执行，它都会在其后面执行 -->
             <aop:after method="afterPrintLog" pointcut-ref="pt1"></aop:after>
 
+            <!--
+                配置切入点表达式，id属性用于指定表达式的唯一标识。expression 属性用于指定表达式内容
+                此标签写在 aop:aspect 标签内部只能当前切面使用
+                它还可以写在 aop:aspect 外面，此时就变成了所有切面可用
+            -->
+            <aop:pointcut id="pt1" expression="execution(* com.cc1021.service.impl.*.*(..))"></aop:pointcut>
         </aop:aspect>
     </aop:config>
-
 </beans>
