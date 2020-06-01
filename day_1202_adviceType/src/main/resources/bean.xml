@@ -15,26 +15,29 @@
 
     <!-- 配置 AOP -->
     <aop:config>
-        <!-- 配置切面 -->
-        <aop:aspect id="logAdvise" ref="logger">
-            <!-- 配置前置通知，在切入点方法执行之前执行 -->
-            <aop:before method="beforePrintLog" pointcut-ref="pt1"></aop:before>
-
-            <!-- 配置后置通知，在切入点方法正常执行之后执行。它和异常通知永远只能执行一个 -->
-            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt1"></aop:after-returning>
-
-            <!-- 配置异常通知，在切入点方法执行产生异常后执行。它和后置通知永远只能执行一个 -->
-            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pt1"></aop:after-throwing>
-
-            <!-- 配置最终通知，无论切入点方法是否正常执行，它都会在其后面执行 -->
-            <aop:after method="afterPrintLog" pointcut-ref="pt1"></aop:after>
-
-            <!--
+        <!--
                 配置切入点表达式，id属性用于指定表达式的唯一标识。expression 属性用于指定表达式内容
                 此标签写在 aop:aspect 标签内部只能当前切面使用
                 它还可以写在 aop:aspect 外面，此时就变成了所有切面可用
             -->
-            <aop:pointcut id="pt1" expression="execution(* com.cc1021.service.impl.*.*(..))"></aop:pointcut>
+        <aop:pointcut id="pt1" expression="execution(* com.cc1021.service.impl.*.*(..))"></aop:pointcut>
+
+        <!-- 配置切面 -->
+        <aop:aspect id="logAdvise" ref="logger">
+<!--            &lt;!&ndash; 配置前置通知，在切入点方法执行之前执行 &ndash;&gt;-->
+<!--            <aop:before method="beforePrintLog" pointcut-ref="pt1"></aop:before>-->
+
+<!--            &lt;!&ndash; 配置后置通知，在切入点方法正常执行之后执行。它和异常通知永远只能执行一个 &ndash;&gt;-->
+<!--            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt1"></aop:after-returning>-->
+
+<!--            &lt;!&ndash; 配置异常通知，在切入点方法执行产生异常后执行。它和后置通知永远只能执行一个 &ndash;&gt;-->
+<!--            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pt1"></aop:after-throwing>-->
+
+<!--            &lt;!&ndash; 配置最终通知，无论切入点方法是否正常执行，它都会在其后面执行 &ndash;&gt;-->
+<!--            <aop:after method="afterPrintLog" pointcut-ref="pt1"></aop:after>-->
+
+            <!-- 配置环绕通知 详细的注释请看 Logger 类中 -->
+            <aop:around method="aroundPrintLog" pointcut-ref="pt1"></aop:around>
         </aop:aspect>
     </aop:config>
 </beans>
