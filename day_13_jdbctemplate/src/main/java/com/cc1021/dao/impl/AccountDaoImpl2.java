@@ -2,15 +2,21 @@ package com.cc1021.dao.impl;
 
 import com.cc1021.dao.IAccountDao;
 import com.cc1021.domain.Account;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  *  账户的持久层实现类
  */
-public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
+@Repository
+public class AccountDaoImpl2 implements IAccountDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     /**
      * 根据Id查询账户
@@ -19,7 +25,7 @@ public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
      * @return
      */
     public Account findAccountById(Integer accountId) {
-        List<Account> accounts = getJdbcTemplate().query("select * from account where id = ?", new BeanPropertyRowMapper<Account>(Account.class), accountId);
+        List<Account> accounts = jdbcTemplate.query("select * from account where id = ?", new BeanPropertyRowMapper<Account>(Account.class), accountId);
         return accounts.isEmpty()?null:accounts.get(0);
     }
 
@@ -30,7 +36,7 @@ public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
      * @return
      */
     public Account findAccountByName(String accountName) {
-        List<Account> accounts = getJdbcTemplate().query("select * from account where name = ?", new BeanPropertyRowMapper<Account>(Account.class), accountName);
+        List<Account> accounts = jdbcTemplate.query("select * from account where name = ?", new BeanPropertyRowMapper<Account>(Account.class), accountName);
         if (accounts.isEmpty()){
             return null;
         }
@@ -48,6 +54,6 @@ public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
      * @param account
      */
     public void updateAccount(Account account) {
-        getJdbcTemplate().update("update account set name=?, money=? where id=?", account.getName(), account.getMoney(), account.getId());
+        jdbcTemplate.update("update account set name=?, money=? where id=?", account.getName(), account.getMoney(), account.getId());
     }
 }
