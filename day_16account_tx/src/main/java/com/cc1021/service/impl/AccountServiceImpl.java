@@ -28,7 +28,7 @@ public class AccountServiceImpl implements IAccountService {
         this.accountDao = accountDao;
     }
 
-    public Account findAccountById(Integer accountId) {
+    public Account findAccountById(final Integer accountId) {
         return transactionTemplate.execute(new TransactionCallback<Account>() {
             public Account doInTransaction(TransactionStatus transactionStatus) {
                 return accountDao.findAccountById(accountId);
@@ -36,7 +36,7 @@ public class AccountServiceImpl implements IAccountService {
         });
     }
 
-    public void transfer(String sourceName, String targetName, Float money) {
+    public void transfer(final String sourceName, final String targetName, final Float money) {
         transactionTemplate.execute(new TransactionCallback<Object>() {
             public Object doInTransaction(TransactionStatus transactionStatus) {
 
